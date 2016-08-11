@@ -1,8 +1,14 @@
+
+var path = require('path');
 var express = require('express');
 var moment = require('moment');
 var app = express();
 
-app.get('/', function (req, res) {
+app.set('port', (process.env.PORT || 3000));
+
+app.use('/', express.static(path.join(__dirname, 'public')));
+
+app.get('/time', function (req, res) {
   var now = moment();
   var wesmelonsBirthday = moment([2016, 11, 3]);
   res.send('Hello! Today is ' + now.format('MMMM Do YYYY, h:mm:ss a')
